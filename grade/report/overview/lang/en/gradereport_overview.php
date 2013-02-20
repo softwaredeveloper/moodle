@@ -24,3 +24,4 @@
 
 $string['pluginname'] = 'Overview report';
 $string['overview:view'] = 'View the overview report';
+$string['cummulative_grade'] = 'Cummulative Grade: ';/* Added by Chris http://www.perl-resume.com */

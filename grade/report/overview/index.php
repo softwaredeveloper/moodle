@@ -142,7 +142,11 @@ if (has_capability('moodle/grade:viewall', $systemcontext)) { //Admins will see 
 
     // print the page
     print_grade_page_head($courseid, 'report', 'overview', get_string('pluginname', 'gradereport_overview'). ' - '.fullname($report->user));
-
+	/* Added by Chris http://www.perl-resume.com */
+	if ($report->cummulative_grade())
+	{
+	echo "<center>".get_string('cummulative_grade', 'gradereport_overview').$report->cummulative_grade()."</center>";
+	}
     if ($report->fill_table()) {
         echo '<br />'.$report->print_table(true);
     }

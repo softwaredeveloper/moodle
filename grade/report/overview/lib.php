@@ -228,6 +228,55 @@ class grade_report_overview extends grade_report {
     }
     function process_action($target, $action) {
     }
+	
+	
+/* Added by Chris http://www.perl-resume.com */
+
+public function cummulative_grade() {
+        global $CFG, $DB, $OUTPUT;
+		$cc = 0;
+		$cfinalgrade = 0;
+        // Only show user's courses instead of all courses.
+        if ($this->courses) {
+            $numusers = $this->get_numusers(false);
+
+            foreach ($this->courses as $course) {
+                if (!$course->showgrades) {
+                    continue;
+                }
+                // Get course grade_item
+                $course_item = grade_item::fetch_course_item($course->id);
+
+                // Get the stored grade
+                $course_grade = new grade_grade(array('itemid'=>$course_item->id, 'userid'=>$this->user->id));
+                $course_grade->grade_item =& $course_item;
+                $finalgrade = $course_grade->finalgrade;
+
+                if (!$canviewhidden and !is_null($finalgrade)) {
+                    if ($course_grade->is_hidden()) {
+                        $finalgrade = null;
+                    } else {
+						$cc++;
+                        $cfinalgrade += $this->blank_hidden_total($course->id, $course_item, $finalgrade);
+                    }
+                }
+
+            }
+			if ($cc > 0)
+			{
+			$data = grade_format_gradevalue(($cfinalgrade/$cc), $course_item, true);
+            return $data;
+			}
+			else
+			{
+			return false;
+			}
+
+        } else {
+           
+            return false;
+        }
+    }
 }
 
 function grade_report_overview_settings_definition(&$mform) {
