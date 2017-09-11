@@ -1,4 +1,4 @@
 moodle
 ======
 
-Moodle gradebook modifications (http://www.phpfreelanceprogrammer.com/customize-moodle.html) can be done.
+Moodle gradebook modifications. [Freelance Moodle Developer](https://www.phpfreelanceprogrammer.com/customize-moodle.html) can be done.
